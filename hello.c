@@ -1,16 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-int main(){
-    float nb1;
-    float nb2;
-    printf("\nHello\n\n");
-    printf("We will make some additions\n");
-    printf("Give a number:\t");
-    scanf("%f",&nb1);
-    printf("Give a second number: \t");
-    scanf("%f",&nb2);
-    float som = nb1 + nb2;
-    printf("The sum of %f and %f is equal to %f", nb1, nb2, som);
+// config ? tout ce qui va changer en fct du scénario
+int TEMP_CHAMBRE = -40;
+int TIMER = 600;
+
+#define MAXCHAR 1000
+
+int main()
+{
+
+    FILE *fp;
+    char str[MAXCHAR];
+    char *filename = "config.csv";
+
+    fp = fopen(filename, "r");
+    if (fp == NULL){
+        printf("Pas oujvert");
+        return 1;
+    }
+
+    while (fgets(str, MAXCHAR, fp) != NULL)
+        printf("%s", str);
+
+    fclose(fp);
+
     return 0;
 }
