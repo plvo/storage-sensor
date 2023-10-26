@@ -5,6 +5,10 @@
 #define MAX_LINE_LENGTH 1024
 #define MAX_FIELD_LENGTH 256
 
+int degreentrop;
+int degreenmoins;
+int ventil;
+
 typedef struct {
     int tempmin;
     int tempmax;
@@ -30,17 +34,17 @@ int main() {
 
     int i = 0;
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
-        int tempmin;
-        int tempmax;
-        int num_frigo;
+        int num_frigo;      
         int temperature_frigo;
+        int tempmin;      
+        int tempmax;
         int nbr_ouverture_porte;
 
-        if (sscanf(ligne, "%d,%d,%d,%d,%d", &tempmin, &tempmax, &num_frigo, &temperature_frigo, &nbr_ouverture_porte) == 3) {
-            info[i].tempmin = tempmin;
-            info[i].tempmax = tempmax;
+        if (sscanf(ligne, "%d,%d,%d,%d,%d", &num_frigo, &temperature_frigo, &tempmin, &tempmax, &nbr_ouverture_porte) == 5) {
             info[i].num_frigo = num_frigo;
             info[i].temperature_frigo = temperature_frigo;
+            info[i].tempmin = tempmin;
+            info[i].tempmax = tempmax;
             info[i].nbr_ouverture_porte = nbr_ouverture_porte;
             i++;
         } else {
@@ -52,8 +56,24 @@ int main() {
 
 
     for (int j = 0; j < i; j++) {
-        printf("Num Frigo: %d, Temperature frigo : %d, Temp min : %d, Temp min : %d, Temp min : %d, Temp min : %d\n\n", info[j].num_frigo, info[j].temperature_frigo, info[j].tempmin, info[j].tempmax, info[j].nbr_ouverture_porte);
+        printf("Num Frigo: %d, Temperature frigo : %d, Temp min : %d, Temp max : %d, nombre de  ouverture de porte : %d\n", info[j].num_frigo, info[j].temperature_frigo, info[j].tempmin, info[j].tempmax, info[j].nbr_ouverture_porte);
     }
 
+
+    for (int k = 0; k < i; k++) {
+        if (info[k].temperature_frigo > info[k].tempmax){
+            degreentrop = info[k].temperature_frigo - info[k].tempmax;
+            ventil = degreentrop*2;
+            printf("frigo numero %d trop froid de %d degre, arret de ventilation pendant %d minutes\n", info[k].num_frigo, degreentrop, ventil);
+        }
+    }
+    
+    for (int k = 0; k < i; k++) {
+        if (info[k].temperature_frigo < info[k].tempmin){
+            degreenmoins = info[k].tempmin - info[k].temperature_frigo;
+            ventil = degreenmoins*2;
+            printf("frigo numero %d trop chaud de %d degre, ventilation booster pendant %d minutes\n", info[k].num_frigo, degreentrop, ventil);
+        }
+    }
     return 0;
 }
