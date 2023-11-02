@@ -49,7 +49,7 @@ struct Capt {
 
 int main() {
     FILE *fichier;
-    fichier = fopen("./output/config.csv", "r");
+    fichier = fopen("config.csv", "r");
 
     if (fichier == NULL) {
         printf("Impossible d'ouvrir le fichier.\n");
@@ -63,30 +63,18 @@ int main() {
         struct Capt capteurs[12];
         
         int i = 0;
-
         while (token != NULL) {
             printf("token actuel : %s\n", token);
-
             capteurs[i].variable = 0;
-            capteurs[i].nomCapt = token;
-
+            capteurs[i].nomCapt = strdup(token);
             printf("token actuel 222 : %s\n\n", capteurs[i].nomCapt);
-
             token = strtok(NULL, ",");
-
             i++;
-            // int resultat = capteurs[i].fonction(capteurs[i].variable);
-            // printf("Resultat pour %s : %d \n\n\n", token, resultat);
         }
 
-        for (int i = 0; i < 13; i++){
-            printf("%d) %s\n", i, capteurs[i].nomCapt);
+        for (int j = 0; j < 13; j++){
+            printf("%d) %s\n", j, capteurs[j].nomCapt);
         }
-        
-        // for (i = 0; i < 12; i++) {
-        //     int resultat = capteurs[i].fonction(capteurs[i].variable);
-        //     printf("Resultat pour %s : %d \n", token, resultat);
-        // }
     }
 
     fclose(fichier);
