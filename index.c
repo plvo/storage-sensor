@@ -65,12 +65,10 @@ int main() {
         int i = 0;
 
         while (token != NULL) {
-            printf("token actuel : %s\n", token);
-
             capteurs[i].variable = 0;
-            capteurs[i].nomCapt = token;
+            capteurs[i].nomCapt = strdup(token);
 
-            printf("token actuel 222 : %s\n\n", capteurs[i].nomCapt);
+            printf("%d) token actuel : %s\n\n",i, capteurs[i].nomCapt);
 
             token = strtok(NULL, ",");
 
@@ -79,8 +77,8 @@ int main() {
             // printf("Resultat pour %s : %d \n\n\n", token, resultat);
         }
 
-        for (int i = 0; i < 13; i++){
-            printf("%d) %s\n", i, capteurs[i].nomCapt);
+        for (int j = 0; i < 13; j++){
+            printf("%d) %s = %d\n", i, capteurs[j].nomCapt, capteurs[j].variable);
         }
         
         // for (i = 0; i < 12; i++) {
