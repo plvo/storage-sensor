@@ -62,7 +62,7 @@ struct Capt {
 
 int main() {
     FILE *fichier;
-    fichier = fopen("config.csv", "r");
+    fichier = fopen("./output/config.csv", "r");
 
     if (fichier == NULL) {
         printf("Impossible d'ouvrir le fichier.\n");
@@ -79,6 +79,7 @@ int main() {
         while (token != NULL && i < MAX_SENSOR_COUNT) {
             capteurs[i].variable = 0;
             capteurs[i].nomCapt = strdup(token);
+            // capteurs[i].fonction = capteurs[i].nomCapt;
             printf("Capteur ajoute : %s\n", capteurs[i].nomCapt);
             token = strtok(NULL, ",");
             i++;
@@ -91,7 +92,7 @@ int main() {
                 if (token != NULL) {
                     int valeur = atoi(token);
                     capteurs[j].variable = valeur;
-                    printf("%s : %d\n", capteurs[j].nomCapt, capteurs[j].variable);
+                    printf("%s : %d\n", capteurs[j].nomCapt, capteurs[j].variable, capteurs[j].fonction);
                     token = strtok(NULL, ",");
                 }
             }

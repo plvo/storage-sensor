@@ -1,2 +1,0 @@
-num_frigo, temperature_frigo, tempmin, tempmax, nbr_ouverture_porte;
-1, -22, -30, -40, 2;
