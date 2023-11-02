@@ -1,27 +1,23 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
 
-// config ? tout ce qui va changer en fct du scénario
-int TEMP_CHAMBRE = -40;
-int TIMER = 600;
 
-#define MAXCHAR 1000
-
-int main()
-{
-
+int main(){
     FILE *fp;
-    char str[MAXCHAR];
+    char str[1000];
     char *filename = "config.csv";
 
+    int BADGE_ON, ENTER_DOOR_OPEN, ENTER_DOOR_CLOSE, TIMER_ON, TEMP_START, TIMER_CHECK, EXIT_DOOR_OPEN, EXIT_DOOR_CLOSE;
+
     fp = fopen(filename, "r");
+    
     if (fp == NULL){
-        printf("Pas oujvert");
+        printf("Pas ouvert");
         return 1;
     }
 
-    while (fgets(str, MAXCHAR, fp) != NULL)
+    while (fgets(str, 1000, fp) != NULL)
         printf("%s", str);
 
     fclose(fp);
