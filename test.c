@@ -29,7 +29,7 @@ int main() {
         return 1;
     }
 
-    // Ignorer la première ligne -> titre 
+    // Ignorer la première ligne
     fgets(ligne, sizeof(ligne), fichier);
 
     int i = 0;
