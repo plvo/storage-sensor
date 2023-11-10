@@ -69,7 +69,7 @@ struct Capt {
 int main() {
     FILE *fichier;
     // Lecture du fichier de config
-    fichier = fopen("./output/config.csv", "r");
+    fichier = fopen("./output/./output/config.csv", "r");
 
     // Vérification de la bonne lecture du fichier config
     if (fichier == NULL) {
@@ -89,7 +89,7 @@ int main() {
             printf("token actuel : %s\n", token);
             capteurs[i].variable = 0;
             capteurs[i].nomCapt = strdup(token);
-            printf("token actuel 222 : %s\n\n", capteurs[i].nomCapt);
+            printf("Capteur ajoute : %s\n", capteurs[i].nomCapt);
             token = strtok(NULL, ",");
             i++;
             // int resultat = capteurs[i].fonction(capteurs[i].variable);
