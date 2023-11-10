@@ -51,18 +51,22 @@ int main() {
         printf("Le fichier est vide ou ne contient pas de données CSV valides.\n");
     }
 
-    int *tab_total = (int *)malloc(nombre_lignes * sizeof(int));
-    if (tab_total == NULL) {
+    int *allFrigo = (int *)malloc(nombre_lignes * sizeof(int));
+    if (allFrigo == NULL) {
         printf("Échec de l'allocation de mémoire.\n");
         return 1;
     }
 
     for (int y = 0; y < nombre_lignes; y++) {
-        tab_total[y] = 1;
-        printf("%d ", tab_total[y]);
+        //création d'un sous tableau
+        int *frigo = (int *)malloc(nombre_colonnes * sizeof(int));
+
+        //remplissage du frigo
+
+        //ajout du sous tableau dans allFrigo
     }
 
-    free(tab_total);
+    free(allFrigo);
 
     return 0;
 }
