@@ -13,10 +13,12 @@ struct Capt {
     int (*fonction)(int);
 };
 
-int main() {
-    // Ouvrir le fichier CSV en mode lecture
-    FILE *fichier = fopen("config.csv", "r");
-    
+int main(){
+    FILE *fichier;
+    // Lecture du fichier de config
+    fichier = fopen("./output/config.csv", "r");
+
+    // Vérification de la bonne lecture du fichier config
     if (fichier == NULL) {
         printf("Impossible d'ouvrir le fichier.\n");
         return 1;
