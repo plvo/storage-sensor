@@ -167,4 +167,3 @@ int main() {
 //          tab_total[j].append(data)
 //   }}
 
-fnbezugfi

@@ -15,7 +15,7 @@ struct Capt {
 
 int main() {
     FILE *fichier;
-    fichier = fopen("./config.csv", "r");
+    fichier = fopen("./output/config.csv", "r");
 
     // Vérification de la bonne lecture du fichier config
     if (fichier == NULL) {
@@ -44,35 +44,92 @@ int main() {
     fclose(fichier);
 
     if (nombre_lignes > 0 && nombre_colonnes > 0) {
-        nombre_lignes = nombre_lignes - 1;
+        nombre_lignes -= 1;
         printf("Nombre de lignes : %d\n", nombre_lignes);
         printf("Nombre de colonnes : %d\n", nombre_colonnes);
+
+        // Initialisation du tableau global avec sa memoire 
+        int **allFrigo = (int **)malloc(nombre_lignes * sizeof(int *));
+        if (allFrigo == NULL) {
+            printf("Échec de l'allocation de mémoire.\n");
+            return 1;
+        }
+
+        for (int y = 0; y < nombre_lignes; y++) {
+            int *frigo = (int *)malloc(nombre_colonnes * sizeof(int));
+
+            // Lire le fichier ligne par ligne pour obtenir les valeurs de chaque colonne
+            fichier = fopen("./config.csv", "r"); // Ré-ouvrir le fichier pour le lire à nouveau
+            for (int x = 0; x <= y; x++) {
+                fgets(ligne, sizeof(ligne), fichier); // Lire les lignes jusqu'à atteindre la ligne y
+                printf("%d - ligne : %d\n",x, ligne);
+            }
+            fclose(fichier);
+
+            // // Utiliser strtok pour séparer les valeurs de chaque colonne
+            // char *token = strtok(ligne, ",");
+            // int i = 0;
+            // // for(int z=0; z<nombre_colonnes; z++){
+            // //     struct Capt scoubidou;
+            // //     frigo[z] = scoubidou;
+            // //     frigo[z]
+            // // }
+
+            // while (token != NULL) {
+            //     frigo[i++] = atoi(token); // Convertir la chaîne en entier et stocker dans le tableau
+            //     printf("%d,", atoi(token));
+            //     token = strtok(NULL, ",");
+            // }
+
+            // for(int z=0; z>nombre_colonnes;z++){
+            //     printf('%d', frigo[z]);
+            // }
+            
+
+            free(frigo);
+            allFrigo[y] = frigo;
+        }
+        free(allFrigo);
     } else {
         printf("Le fichier est vide ou ne contient pas de données CSV valides.\n");
     }
 
-    int *allFrigo = (int *)malloc(nombre_lignes * sizeof(int));
-    if (allFrigo == NULL) {
-        printf("Échec de l'allocation de mémoire.\n");
-        return 1;
-    }
+    // if (nombre_lignes > 0 && nombre_colonnes > 0) {
+    //     nombre_lignes = nombre_lignes - 1;
+    //     printf("Nombre de lignes : %d\n", nombre_lignes);
+    //     printf("Nombre de colonnes : %d\n", nombre_colonnes);
+    // } else {
+    //     printf("Le fichier est vide ou ne contient pas de données CSV valides.\n");
+    // }
 
-    for (int y = 0; y < nombre_lignes; y++) {
-        //création d'un sous tableau
-        int *frigo = (int *)malloc(nombre_colonnes * sizeof(int));
+    // int *allFrigo = (int *)malloc(nombre_lignes * sizeof(int));
+    // if (allFrigo == NULL) {
+    //     printf("Échec de l'allocation de mémoire.\n");
+    //     return 1;
+    // }
 
-        //remplissage du frigo
-        for (int w = 0; w < nombre_colonnes; w++){
-            //pour chaque rec, créé l'objet associé en utilisant la structure et l'ajouter au frigo
-            
-        }
+    // for (int y = 0; y < nombre_lignes; y++) {
+    //     //création d'un sous tableau
+    //     int *frigo = (int *)malloc(nombre_colonnes * sizeof(int));
 
+    //     fichier = fopen("./output/config.csv", "r");
+    //     for (int x = 0; x <= y; x++) {
+    //         fgets(ligne, sizeof(ligne), fichier);
+    //     }
+    //     fclose(fichier);
 
-        //ajout du sous tableau dans allFrigo
-        allFrigo[y] = frigo;
-    }
+    //     // Utiliser strtok pour séparer les valeurs de chaque colonne
+    //     char *token = strtok(ligne, ",");
+    //     int i = 0;
+    //     while (token != NULL) {
+    //         allFrigo[y][i++] = atoi(token); // Convertir la chaîne en entier et stocker dans le tableau
+    //         token = strtok(NULL, ",");
+    //     }
+    //     //ajout du sous tableau dans allFrigo
+    //     // allFrigo[y] = frigo;
+    // }
 
-    free(allFrigo);
+    // free(allFrigo);
 
     return 0;
 }
