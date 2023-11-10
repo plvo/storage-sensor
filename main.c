@@ -51,20 +51,18 @@ int main() {
         printf("Le fichier est vide ou ne contient pas de données CSV valides.\n");
     }
 
-    // Allocation dynamique d'un tableau d'entiers et initialisation à 1
-    int *tab = (int *)malloc(nombre_lignes * sizeof(int));
-    if (tab == NULL) {
+    int *tab_total = (int *)malloc(nombre_lignes * sizeof(int));
+    if (tab_total == NULL) {
         printf("Échec de l'allocation de mémoire.\n");
         return 1;
     }
 
     for (int y = 0; y < nombre_lignes; y++) {
-        tab[y] = 1;
-        printf("%d ", tab[y]);
+        tab_total[y] = 1;
+        printf("%d ", tab_total[y]);
     }
 
-    // N'oubliez pas de libérer la mémoire allouée dynamiquement lorsque vous avez terminé.
-    free(tab);
+    free(tab_total);
 
     return 0;
 }
