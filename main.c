@@ -51,7 +51,6 @@ int main() {
         printf("Le fichier est vide ou ne contient pas de données CSV valides.\n");
     }
 
-    // Création du tableau global, allocation mémoire avec le nb de ligne
     int *allFrigo = (int *)malloc(nombre_lignes * sizeof(int));
     if (allFrigo == NULL) {
         printf("Échec de l'allocation de mémoire.\n");
@@ -59,10 +58,15 @@ int main() {
     }
 
     for (int y = 0; y < nombre_lignes; y++) {
-        //création d'un sous tableau qui represente une chambre frigorifique
+        //création d'un sous tableau
         int *frigo = (int *)malloc(nombre_colonnes * sizeof(int));
 
         //remplissage du frigo
+        for (int w = 0; w < nombre_colonnes; w++){
+            //pour chaque rec, créé l'objet associé en utilisant la structure et l'ajouter au frigo
+            
+        }
+
 
         //ajout du sous tableau dans allFrigo
         allFrigo[y] = frigo;
