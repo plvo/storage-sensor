@@ -3,11 +3,13 @@
 #include <string.h>
 
 #define MAX_LINE_LENGTH 1024
+#define MAX_SENSOR_COUNT 13
+#define MAX_FRIGO 4
 
 // Déclaration des fonctions renvoyant les valeurs des différents capteurs :
 
 //capteur ventilation
-int VENTILATION_START(int variable){
+int VENTILATION_START(int variable) {
     return variable;
 }
 //capteur du badge
@@ -76,36 +78,27 @@ int main() {
     }
 
     char ligne[MAX_LINE_LENGTH];
+    struct Capt capteurs[MAX_SENSOR_COUNT];
 
-    if (fgets(ligne, sizeof(ligne), fichier) != NULL) { // lecture d'une ligne du fichier de config et Stocke cette ligne  
-        char *token = strtok(ligne, ","); // Diviser la ligne lue en tokens en utilisant la virgule comme séparateur et stocke la donnée au premier rang
+    if (fgets(ligne, sizeof(ligne), fichier) != NULL) {
+        char *token = strtok(ligne, ",");
         struct Capt capteurs[12];
         
         int i = 0;
-
-        while (token != NULL) { // Parcours des tokens correspondant au frigo 
+        while (token != NULL) {
             printf("token actuel : %s\n", token);
-
             capteurs[i].variable = 0;
-            capteurs[i].nomCapt = token; // Ajout de la donnée du token dans la variable 'capteurs'
-
+            capteurs[i].nomCapt = strdup(token);
             printf("token actuel 222 : %s\n\n", capteurs[i].nomCapt);
-
-            token = strtok(NULL, ","); // Token se réfère à la donnée suivante
-
+            token = strtok(NULL, ",");
             i++;
             // int resultat = capteurs[i].fonction(capteurs[i].variable);
             // printf("Resultat pour %s : %d \n\n\n", token, resultat);
         }
 
-        for (int i = 0; i < 13; i++){
-            printf("%d) %s\n", i, capteurs[i].nomCapt);
+        for (int j = 0; j < 13; j++){
+            printf("%d) %s\n", j, capteurs[j].nomCapt);
         }
-        
-        // for (i = 0; i < 12; i++) {
-        //     int resultat = capteurs[i].fonction(capteurs[i].variable);
-        //     printf("Resultat pour %s : %d \n", token, resultat);
-        // }
     }
 
     fclose(fichier);
