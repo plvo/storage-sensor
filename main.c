@@ -64,6 +64,7 @@ int main() {
         //remplissage du frigo
 
         //ajout du sous tableau dans allFrigo
+        allFrigo[y] = frigo;
     }
 
     free(allFrigo);
