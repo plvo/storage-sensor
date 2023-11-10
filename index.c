@@ -104,3 +104,16 @@ int main() {
     fclose(fichier);
     return 0;
 }
+
+ 
+// soit tab_de_base le tableau des frigos et leur capteur
+// soit x le nombre de lignes dans ce tab
+// soit y le nombre de colonnes dans ce tab
+
+// int tab_total[x]
+// for (int i = 0; i < x; i++){
+//      int tab_frigo[y]
+//      for (int j = 0; j < y; j++){
+//          data = "récup de data"
+//          tab_total[j].append(data)
+//   }}
