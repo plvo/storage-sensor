@@ -59,7 +59,7 @@ int main() {
     }
 
     for (int y = 0; y < nombre_lignes; y++) {
-        //création d'un sous tableau
+        //création d'un sous tableau qui represente une chambre frigorifique
         int *frigo = (int *)malloc(nombre_colonnes * sizeof(int));
 
         //remplissage du frigo
