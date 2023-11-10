@@ -11,6 +11,7 @@ void write_CSV(const char *data) {
     fprintf(file, "%s\n", data);
     fclose(file);
 }
+
 int main() {
     write_CSV("la tu met ce que tu veut marquer pelouz");
     write_CSV("la tu nique tes mor ya zobbi");
