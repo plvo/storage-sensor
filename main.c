@@ -15,7 +15,6 @@ struct Capt {
 
 int main(){
     FILE *fichier;
-    // Lecture du fichier de config
     fichier = fopen("./output/config.csv", "r");
 
     // Vérification de la bonne lecture du fichier config
@@ -26,7 +25,7 @@ int main(){
 
     int nombre_lignes = 0;
     int nombre_colonnes = 0;
-    char ligne[1024];  // Vous pouvez ajuster la taille en fonction de vos besoins
+    char ligne[MAX_LINE_LENGTH];  
 
     // Lire le fichier ligne par ligne
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
