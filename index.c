@@ -7,55 +7,104 @@
 #define MAX_FRIGO 4
 
 // Déclaration des fonctions renvoyant les valeurs des différents capteurs :
+// Chaque fonction doit renvoyer 0 si la valeur n'est pas celle attendu et 1 si tout est bon
 
 //capteur ventilation
 int VENTILATION_START(int variable) {
-    return variable;
+    if (variable==1){
+        return 1
+    } else {
+        return 0;
+    }
 }
 //capteur du badge
 int BADGE_ON(int variable){
-    return variable;
+    if (variable==1){
+        return 1
+    } else {
+        return 0;
+    }
 }
 //capteur de l'ouverure de la porte du frigo
 int ENTER_DOOR_OPEN(int variable){
-    return variable;
+    if (variable==1){
+        return 1
+    } else {
+        return 0;
+    }
 }
 
 //capteur de la fermeture de la porte du frigo
 int ENTER_DOOR_CLOSE(int variable){
-    return variable;
+    if (variable==1){
+        return 1
+    } else {
+        return 0;
+    }
 }
 //lancement du chronomètre du frigo
 int TIMER_ON(int variable){
-    return variable;
+    if (variable==1){
+        return 1
+    } else {
+        return 0;
+    }
 }
 //capteur de la température du frigo avant toute action
 int TEMP_START(int variable){
-    return variable;
+    if (variable==1){
+        return 1
+    } else {
+        return 0;
+    }
 }
 //vérification du chronomètre
 int TIMER_CHECK(int variable){
-    return variable;
+    if (variable<=10){
+        return 1
+    } else {
+        return 0;
+    }
 }
 // capteur d'ouverture de porte à la sortie
 int EXIT_DOOR_OPEN(int variable){
-    return variable;
+    if (variable==1){
+        return 1
+    } else {
+        return 0;
+    }
 }
 //capteur de la fermeture de la porte à la sortie
 int EXIT_DOOR_CLOSE(int variable){
-    return variable;
+    if (variable==1){
+        return 1
+    } else {
+        return 0;
+    }
 }
 //vérification que le badge est récupéré
 int BADGE_OFF(int variable){
-    return variable;
+    if (variable==1){
+        return 1
+    } else {
+        return 0;
+    }
 }
 //vérification de la température à la fin de toute action
 int TEMP_END(int variable){
-    return variable;
+    if (variable==1){
+        return 1
+    } else {
+        return 0;
+    }
 }
 //vérification de l'état de la ventilation à la sortie
 int VENTILATION_EXIT(int variable){
-    return variable;
+    if (variable==1){
+        return 1
+    } else {
+        return 0;
+    }
 }
 
 // Définition de la structure d'un capteur
