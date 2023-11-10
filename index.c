@@ -12,7 +12,7 @@
 //capteur ventilation
 int VENTILATION_START(int variable) {
     if (variable==1){
-        return 1
+        return 1;
     } else {
         return 0;
     }
@@ -20,7 +20,7 @@ int VENTILATION_START(int variable) {
 //capteur du badge
 int BADGE_ON(int variable){
     if (variable==1){
-        return 1
+        return 1;
     } else {
         return 0;
     }
@@ -28,7 +28,7 @@ int BADGE_ON(int variable){
 //capteur de l'ouverure de la porte du frigo
 int ENTER_DOOR_OPEN(int variable){
     if (variable==1){
-        return 1
+        return 1;
     } else {
         return 0;
     }
@@ -37,7 +37,7 @@ int ENTER_DOOR_OPEN(int variable){
 //capteur de la fermeture de la porte du frigo
 int ENTER_DOOR_CLOSE(int variable){
     if (variable==1){
-        return 1
+        return 1;
     } else {
         return 0;
     }
@@ -45,7 +45,7 @@ int ENTER_DOOR_CLOSE(int variable){
 //lancement du chronomètre du frigo
 int TIMER_ON(int variable){
     if (variable==1){
-        return 1
+        return 1;
     } else {
         return 0;
     }
@@ -53,7 +53,7 @@ int TIMER_ON(int variable){
 //capteur de la température du frigo avant toute action
 int TEMP_START(int variable){
     if (variable==1){
-        return 1
+        return 1;
     } else {
         return 0;
     }
@@ -61,7 +61,7 @@ int TEMP_START(int variable){
 //vérification du chronomètre
 int TIMER_CHECK(int variable){
     if (variable<=10){
-        return 1
+        return 1;
     } else {
         return 0;
     }
@@ -69,7 +69,7 @@ int TIMER_CHECK(int variable){
 // capteur d'ouverture de porte à la sortie
 int EXIT_DOOR_OPEN(int variable){
     if (variable==1){
-        return 1
+        return 1;
     } else {
         return 0;
     }
@@ -77,7 +77,7 @@ int EXIT_DOOR_OPEN(int variable){
 //capteur de la fermeture de la porte à la sortie
 int EXIT_DOOR_CLOSE(int variable){
     if (variable==1){
-        return 1
+        return 1;
     } else {
         return 0;
     }
@@ -85,7 +85,7 @@ int EXIT_DOOR_CLOSE(int variable){
 //vérification que le badge est récupéré
 int BADGE_OFF(int variable){
     if (variable==1){
-        return 1
+        return 1;
     } else {
         return 0;
     }
@@ -93,7 +93,7 @@ int BADGE_OFF(int variable){
 //vérification de la température à la fin de toute action
 int TEMP_END(int variable){
     if (variable==1){
-        return 1
+        return 1;
     } else {
         return 0;
     }
@@ -101,7 +101,7 @@ int TEMP_END(int variable){
 //vérification de l'état de la ventilation à la sortie
 int VENTILATION_EXIT(int variable){
     if (variable==1){
-        return 1
+        return 1;
     } else {
         return 0;
     }

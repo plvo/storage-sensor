@@ -13,9 +13,9 @@ struct Capt {
     int (*fonction)(int);
 };
 
-int main(){
+int main() {
     FILE *fichier;
-    fichier = fopen("./output/config.csv", "r");
+    fichier = fopen("./config.csv", "r");
 
     // Vérification de la bonne lecture du fichier config
     if (fichier == NULL) {
@@ -25,7 +25,7 @@ int main(){
 
     int nombre_lignes = 0;
     int nombre_colonnes = 0;
-    char ligne[MAX_LINE_LENGTH];  
+    char ligne[MAX_LINE_LENGTH];
 
     // Lire le fichier ligne par ligne
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
@@ -50,6 +50,21 @@ int main(){
     } else {
         printf("Le fichier est vide ou ne contient pas de données CSV valides.\n");
     }
+
+    // Allocation dynamique d'un tableau d'entiers et initialisation à 1
+    int *tab = (int *)malloc(nombre_lignes * sizeof(int));
+    if (tab == NULL) {
+        printf("Échec de l'allocation de mémoire.\n");
+        return 1;
+    }
+
+    for (int y = 0; y < nombre_lignes; y++) {
+        tab[y] = 1;
+        printf("%d ", tab[y]);
+    }
+
+    // N'oubliez pas de libérer la mémoire allouée dynamiquement lorsque vous avez terminé.
+    free(tab);
 
     return 0;
 }
