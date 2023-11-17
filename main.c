@@ -287,8 +287,9 @@ int main()
                 // Affichage du résultat de la fonction
                 printf("Le resultat est : %d\n", resultat);
 
-                // printf("%s \n", allFrigo[p][o]->nomCapt);
+                // printf("Valeur de %s : %d \n", allFrigo[p][o]->nomCapt,allFrigo[p][o]->variable);
             }
+            printf("\n");
         }
 
         // Libération de la mémoire
