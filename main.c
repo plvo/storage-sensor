@@ -275,8 +275,9 @@ int main()
         // Affichage des valeurs de tous les frigo
         for (int p = 1; p < nombre_lignes; p++) {
             for (int o = 0; o < nombre_colonnes; o++) {
-                printf("%s \n", allFrigo[p][o]->nomCapt);
+                printf("Valeur de %s : %d \n", allFrigo[p][o]->nomCapt,allFrigo[p][o]->variable);
             }
+            printf("\n");
         }
 
         // Libération de la mémoire
