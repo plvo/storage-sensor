@@ -198,7 +198,7 @@ int main()
         printf("Nombre de colonnes : %d\n", nombre_colonnes);
 
         // Initialisation du tableau global avec sa memoire
-        struct Capt **allFrigo = (struct Capt **)malloc(nombre_lignes * sizeof(struct Capt *));
+        struct Capt ***allFrigo = (struct Capt ***)malloc(nombre_lignes * sizeof(struct Capt **));
         if (allFrigo == NULL)
         {
             printf("Échec de l'allocation de mémoire.\n");
@@ -217,11 +217,22 @@ int main()
 
         for (int y = 1; y < nombre_lignes; y++)
         {
-            struct Capt frigo[nombre_colonnes]; // frigo est un tableau de capteur
+            struct Capt **frigo = (struct Capt **)malloc(nombre_colonnes * sizeof(struct Capt *)); // frigo est un tableau de capteur
+
+            for (int i = 0; i < nombre_colonnes; i++)
+            {
+                frigo[i] = (struct Capt *)malloc(sizeof(struct Capt));
+                if (frigo[i] == NULL)
+                {
+                    printf("Échec de l'allocation de mémoire pour frigo[i].\n");
+                    return 1;
+                }
+            }
 
             char str[BUFSIZE];
             int i = 0;
             char ligne[1000];
+
             while (fgets(str, BUFSIZE, fp) != NULL)
             { // Parcours des lignes de fichier
                 if (i == y)
@@ -250,7 +261,7 @@ int main()
                 nouveauCapteur.variable = atoi(token);
 
                 // Affecter le nouveau capteur au tableau frigo
-                frigo[captCount] = nouveauCapteur;
+                *frigo[captCount] = nouveauCapteur;
 
                 token = strtok(NULL, ",");
                 captCount++;
@@ -259,6 +270,21 @@ int main()
             rewind(fp); // Réinitialiser le curseur
 
             allFrigo[y] = frigo;
+        }
+
+        // Affichage des valeurs de tous les frigo
+        for (int p = 1; p < nombre_lignes; p++) {
+            for (int o = 0; o < nombre_colonnes; o++) {
+                printf("%s \n", allFrigo[p][o]->nomCapt);
+            }
+        }
+
+        // Libération de la mémoire
+        for (int i = 1; i < nombre_lignes; i++) {
+            for (int j = 0; j < nombre_colonnes; j++) {
+                free(allFrigo[i][j]);
+            }
+            free(allFrigo[i]);
         }
         free(allFrigo);
     }
