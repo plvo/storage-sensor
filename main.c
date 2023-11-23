@@ -30,10 +30,6 @@ void write_CSV(const char *data)
     fclose(file);
 }
 
-int test(int un){
-    return un*2;
-}
-
 // Déclaration des fonctions renvoyant les valeurs des différents capteurs :
 // Chaque fonction doit renvoyer 0 si la valeur n'est pas celle attendu et 1 si tout est bon
 
@@ -57,16 +53,16 @@ int BADGE_ON(int variable){
         return 0;
     }
 }
- //capteur de l'ouverure de la porte du frigo
- int ENTER_DOOR_OPEN(int variable){
-     if (variable==1){
-         write_CSV("La porte s'est ouverte - OK \n");
-         return 1;
-     } else {
-         write_CSV("La porte ne s'est pas ouverte - STOP (error) \n");
-         return 0;
-     }
- }
+//capteur de l'ouverure de la porte du frigo
+int ENTER_DOOR_OPEN(int variable){
+    if (variable==1){
+        write_CSV("La porte s'est ouverte - OK \n");
+        return 1;
+    } else {
+        write_CSV("La porte ne s'est pas ouverte - STOP (error) \n");
+        return 0;
+    }
+}
 
 //capteur de la fermeture de la porte du frigo
 int ENTER_DOOR_CLOSE(int variable){
@@ -101,11 +97,15 @@ int TEMP_START(int variable){
 
 //vérification du chronomètre
 int TIMER_CHECK(int variable){
+    char message[100];
+
     if (variable<=10){
-        write_CSV("L'employe est reste %d min dans le frigo - OK \n",variable);
+        sprintf(message, "L'employe est reste %d min dans le frigo - OK\n", variable);
+        write_CSV(message);
         return 1;
     } else {
-        write_CSV("L'employe est reste %d min dans le frigo. Une alerte a ete declenchee - STOP (error) \n", variable);
+        sprintf(message, "L'employe est reste %d min dans le frigo. Une alerte a ete declenchee - STOP (error) \n", variable);
+        write_CSV(message);
         return 0;
     }
 }
@@ -251,7 +251,7 @@ int main()
             int captCount = 0;
             while (token != NULL)
             {
-                printf("Element %d : %s\n", captCount + 1, token);
+                // printf("Element %d : %s\n", captCount + 1, token);
 
                 // Créer une variable structure Capt
                 struct Capt nouveauCapteur;
@@ -261,30 +261,34 @@ int main()
                 snprintf(nom, sizeof(nom), "capteur_%d", captCount);
                 nouveauCapteur.nomCapt = strdup(nom);
 
+                printf("Capt : %s \n", nouveauCapteur.nomCapt);
+
                 // Conditions de mise en place des fonctions :
-                if (nouveauCapteur.nomCapt=="capteur_2"){
+                if (strcmp(nouveauCapteur.nomCapt, "capteur_2") == 0){
                     nouveauCapteur.fonction = VENTILATION_START;
-                } else if (nouveauCapteur.nomCapt=="capteur_3"){
+                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_3") == 0){
                     nouveauCapteur.fonction = BADGE_ON;
-                } else if (nouveauCapteur.nomCapt=="capteur_4"){
+                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_4") == 0){
                     nouveauCapteur.fonction = ENTER_DOOR_OPEN;
-                } else if (nouveauCapteur.nomCapt=="capteur_5"){
+                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_5") == 0){
                     nouveauCapteur.fonction = ENTER_DOOR_CLOSE;
-                } else if (nouveauCapteur.nomCapt=="capteur_6"){
-                    nouveauCapteur.fonction = TIMER_ON,TEMP_START;
-                } else if (nouveauCapteur.nomCapt=="capteur_7"){
+                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_6") == 0){
+                    nouveauCapteur.fonction = TIMER_ON;
+                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_7") == 0){
+                    nouveauCapteur.fonction = TEMP_START;
+                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_8") == 0){
                     nouveauCapteur.fonction = TIMER_CHECK;
-                } else if (nouveauCapteur.nomCapt=="capteur_8"){
+                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_9") == 0){
                     nouveauCapteur.fonction = EXIT_DOOR_OPEN;
-                } else if (nouveauCapteur.nomCapt=="capteur_9"){
+                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_10") == 0){
                     nouveauCapteur.fonction = EXIT_DOOR_CLOSE;
-                } else if (nouveauCapteur.nomCapt=="capteur_10"){
+                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_11") == 0){
                     nouveauCapteur.fonction = BADGE_OFF;
-                } else if (nouveauCapteur.nomCapt=="capteur_11"){
+                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_12") == 0){
                     nouveauCapteur.fonction = TEMP_END;
-                } else if (nouveauCapteur.nomCapt=="capteur_12"){
+                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_13") == 0){
                     nouveauCapteur.fonction = VENTILATION_EXIT;
-                }                
+                }               
                 //
 
                 // Convertir la valeur en entier
@@ -296,7 +300,7 @@ int main()
                 token = strtok(NULL, ",");
                 captCount++;
 
-                printf("Nom : %s \n",nouveauCapteur.nomCapt);
+                // printf("Nom : %s \n",nouveauCapteur.nomCapt);
             }
 
             rewind(fp); // Réinitialiser le curseur
@@ -308,15 +312,16 @@ int main()
         // Affichage des valeurs de tous les frigo
         for (int p = 1; p <= nombre_lignes; p++) {
             for (int o = 0; o < nombre_colonnes; o++) {
-                // int resultat = allFrigo[p][o]->fonction(allFrigo[p][o]->variable);
-                // char resultat = allFrigo[p][o]->nomCapt;
+                int resultat = allFrigo[p][o]->fonction(allFrigo[p][o]->variable);
                 // Affichage du résultat de la fonction
-                // printf("Le resultat est : %d\n", resultat);
+                printf("Le resultat est : %d\n", resultat);
 
                 // printf("Valeur de %s : %d \n", allFrigo[p][o]->nomCapt,allFrigo[p][o]->variable);
             }
             printf("\n");
         }
+
+        printf("Test \n");
 
         // Libération de la mémoire
         for (int i = 1; i <= nombre_lignes; i++) {
