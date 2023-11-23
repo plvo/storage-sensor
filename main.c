@@ -280,6 +280,7 @@ int main()
             rewind(fp); // Réinitialiser le curseur
 
             allFrigo[y] = frigo;
+            // fclose(fp);
         }
 
         // Affichage des valeurs de tous les frigo
