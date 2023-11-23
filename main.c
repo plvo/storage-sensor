@@ -38,127 +38,127 @@ int test(int un){
 // Chaque fonction doit renvoyer 0 si la valeur n'est pas celle attendu et 1 si tout est bon
 
 // capteur ventilation
-//  int VENTILATION_START(int variable) {
-//      if (variable==1){
-//          write_CSV("La ventillation du frigo fonctionne - OK \n");
-//          return 1;
-//      } else {
-//          write_CSV("La ventillation du frigo ne fonctionne pas - STOP (error) \n");
-//          return 0;
-//      }
-//  }
-//  //capteur du badge
-//  int BADGE_ON(int variable){
-//      if (variable==1){
-//          write_CSV("Le badge a ete depose - OK \n");
-//          return 1;
-//      } else {
-//          write_CSV("Le badge n'a pas ete depose - STOP (error) \n");
-//          return 0;
-//      }
-//  }
-//  //capteur de l'ouverure de la porte du frigo
-//  int ENTER_DOOR_OPEN(int variable){
-//      if (variable==1){
-//          write_CSV("La porte s'est ouverte - OK \n");
-//          return 1;
-//      } else {
-//          write_CSV("La porte ne s'est pas ouverte - STOP (error) \n");
-//          return 0;
-//      }
-//  }
+int VENTILATION_START(int variable) {
+    if (variable==1){
+        write_CSV("La ventillation du frigo fonctionne - OK \n");
+        return 1;
+    } else {
+        write_CSV("La ventillation du frigo ne fonctionne pas - STOP (error) \n");
+        return 0;
+    }
+}
+//capteur du badge
+int BADGE_ON(int variable){
+    if (variable==1){
+        write_CSV("Le badge a ete depose - OK \n");
+        return 1;
+    } else {
+        write_CSV("Le badge n'a pas ete depose - STOP (error) \n");
+        return 0;
+    }
+}
+ //capteur de l'ouverure de la porte du frigo
+ int ENTER_DOOR_OPEN(int variable){
+     if (variable==1){
+         write_CSV("La porte s'est ouverte - OK \n");
+         return 1;
+     } else {
+         write_CSV("La porte ne s'est pas ouverte - STOP (error) \n");
+         return 0;
+     }
+ }
 
-// //capteur de la fermeture de la porte du frigo
-// int ENTER_DOOR_CLOSE(int variable){
-//     if (variable==1){
-//         write_CSV("La porte a ete refermee - OK \n");
-//         return 1;
-//     } else {
-//         write_CSV("La porte n'a pas ete refermee - STOP (error) \n");
-//         return 0;
-//     }
-// }
-// //lancement du chronomètre du frigo
-// int TIMER_ON(int variable){
-//     if (variable==1){
-//         write_CSV("Le chronomètre a ete lance - OK \n");
-//         return 1;
-//     } else {
-//         write_CSV("Le chronomètre ne s'est pas lance - STOP (error) \n");
-//         return 0;
-//     }
-// }
-// //capteur de la température du frigo avant toute action
-// int TEMP_START(int variable){
-//     if (variable==-40){
-//         write_CSV("La temperature est valide - OK \n");
-//         return 1;
-//     } else {
-//         write_CSV("La temperature n'est pas bonne - STOP (error) \n");
-//         return 0;
-//     }
-// }
+//capteur de la fermeture de la porte du frigo
+int ENTER_DOOR_CLOSE(int variable){
+    if (variable==1){
+        write_CSV("La porte a ete refermee - OK \n");
+        return 1;
+    } else {
+        write_CSV("La porte n'a pas ete refermee - STOP (error) \n");
+        return 0;
+    }
+}
+//lancement du chronomètre du frigo
+int TIMER_ON(int variable){
+    if (variable==1){
+        write_CSV("Le chronomètre a ete lance - OK \n");
+        return 1;
+    } else {
+        write_CSV("Le chronomètre ne s'est pas lance - STOP (error) \n");
+        return 0;
+    }
+}
+//capteur de la température du frigo avant toute action
+int TEMP_START(int variable){
+    if (variable==-40){
+        write_CSV("La temperature est valide - OK \n");
+        return 1;
+    } else {
+        write_CSV("La temperature n'est pas bonne - STOP (error) \n");
+        return 0;
+    }
+}
 
-// //vérification du chronomètre
-// int TIMER_CHECK(int variable){
-//     if (variable<=10){
-//         write_CSV("L'employe est reste %d min dans le frigo - OK \n",variable);
-//         return 1;
-//     } else {
-//         write_CSV("L'employe est reste %d min dans le frigo. Une alerte a ete declenchee - STOP (error) \n", variable);
-//         return 0;
-//     }
-// }
-// // capteur d'ouverture de porte a la sortie
-// int EXIT_DOOR_OPEN(int variable){
-//     if (variable==1){
-//         write_CSV("La porte a ete ouverte - OK \n");
-//         return 1;
-//     } else {
-//         write_CSV("La porte n'a pas ete ouverte - STOP (error) \n");
-//         return 0;
-//     }
-// }
-// //capteur de la fermeture de la porte a la sortie
-// int EXIT_DOOR_CLOSE(int variable){
-//     if (variable==1){
-//         write_CSV("La porte a ete refermee - OK \n");
-//         return 1;
-//     } else {
-//         write_CSV("La porte n'a pas ete refermee - STOP (error) \n");
-//         return 0;
-//     }
-// }
-// //verification que le badge est recupere
-// int BADGE_OFF(int variable){
-//     if (variable==1){
-//         write_CSV("Le badge a ete recupere - OK \n");
-//         return 1;
-//     } else {
-//         write_CSV("Le badge n'a pas ete recupere - STOP (error) \n");
-//         return 0;
-//     }
-// }
-// //vérification de la température a la fin de toute action
-// int TEMP_END(int variable){
-//     if (variable==-40){
-//         write_CSV("La temperature est correcte apres passage - OK \n");
-//         return 1;
-//     } else {
-//         write_CSV("La temperature n'est pas correcte apres passage - STOP (error) \n");
-//         return 0;
-//     }
-// }
-// //vérification de l'état de la ventilation a la sortie
-// int VENTILATION_EXIT(int variable){
-//     if (variable==1){
-//         write_CSV("La ventilation est toujours active apres passage - OK \n");
-//         return 1;
-//     } else {
-//         write_CSV("La ventilation n'est plus active apres passage - STOP (error) \n");
-//         return 0;
-//     }
-// }
+//vérification du chronomètre
+int TIMER_CHECK(int variable){
+    if (variable<=10){
+        write_CSV("L'employe est reste %d min dans le frigo - OK \n",variable);
+        return 1;
+    } else {
+        write_CSV("L'employe est reste %d min dans le frigo. Une alerte a ete declenchee - STOP (error) \n", variable);
+        return 0;
+    }
+}
+// capteur d'ouverture de porte a la sortie
+int EXIT_DOOR_OPEN(int variable){
+    if (variable==1){
+        write_CSV("La porte a ete ouverte - OK \n");
+        return 1;
+    } else {
+        write_CSV("La porte n'a pas ete ouverte - STOP (error) \n");
+        return 0;
+    }
+}
+//capteur de la fermeture de la porte a la sortie
+int EXIT_DOOR_CLOSE(int variable){
+    if (variable==1){
+        write_CSV("La porte a ete refermee - OK \n");
+        return 1;
+    } else {
+        write_CSV("La porte n'a pas ete refermee - STOP (error) \n");
+        return 0;
+    }
+}
+//verification que le badge est recupere
+int BADGE_OFF(int variable){
+    if (variable==1){
+        write_CSV("Le badge a ete recupere - OK \n");
+        return 1;
+    } else {
+        write_CSV("Le badge n'a pas ete recupere - STOP (error) \n");
+        return 0;
+    }
+}
+//vérification de la température a la fin de toute action
+int TEMP_END(int variable){
+    if (variable==-40){
+        write_CSV("La temperature est correcte apres passage - OK \n");
+        return 1;
+    } else {
+        write_CSV("La temperature n'est pas correcte apres passage - STOP (error) \n");
+        return 0;
+    }
+}
+//vérification de l'état de la ventilation a la sortie
+int VENTILATION_EXIT(int variable){
+    if (variable==1){
+        write_CSV("La ventilation est toujours active apres passage - OK \n");
+        return 1;
+    } else {
+        write_CSV("La ventilation n'est plus active apres passage - STOP (error) \n");
+        return 0;
+    }
+}
 
 int main()
 {
@@ -262,7 +262,29 @@ int main()
                 nouveauCapteur.nomCapt = strdup(nom);
 
                 // Conditions de mise en place des fonctions :
-                nouveauCapteur.fonction = test;
+                if (nouveauCapteur.nomCapt=="capteur_2"){
+                    nouveauCapteur.fonction = VENTILATION_START;
+                } else if (nouveauCapteur.nomCapt=="capteur_3"){
+                    nouveauCapteur.fonction = BADGE_ON;
+                } else if (nouveauCapteur.nomCapt=="capteur_4"){
+                    nouveauCapteur.fonction = ENTER_DOOR_OPEN;
+                } else if (nouveauCapteur.nomCapt=="capteur_5"){
+                    nouveauCapteur.fonction = ENTER_DOOR_CLOSE;
+                } else if (nouveauCapteur.nomCapt=="capteur_6"){
+                    nouveauCapteur.fonction = TIMER_ON,TEMP_START;
+                } else if (nouveauCapteur.nomCapt=="capteur_7"){
+                    nouveauCapteur.fonction = TIMER_CHECK;
+                } else if (nouveauCapteur.nomCapt=="capteur_8"){
+                    nouveauCapteur.fonction = EXIT_DOOR_OPEN;
+                } else if (nouveauCapteur.nomCapt=="capteur_9"){
+                    nouveauCapteur.fonction = EXIT_DOOR_CLOSE;
+                } else if (nouveauCapteur.nomCapt=="capteur_10"){
+                    nouveauCapteur.fonction = BADGE_OFF;
+                } else if (nouveauCapteur.nomCapt=="capteur_11"){
+                    nouveauCapteur.fonction = TEMP_END;
+                } else if (nouveauCapteur.nomCapt=="capteur_12"){
+                    nouveauCapteur.fonction = VENTILATION_EXIT;
+                }                
                 //
 
                 // Convertir la valeur en entier
