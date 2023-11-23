@@ -30,6 +30,10 @@ void write_CSV(const char *data)
     fclose(file);
 }
 
+int test(int un){
+    return un*2;
+}
+
 // Déclaration des fonctions renvoyant les valeurs des différents capteurs :
 // Chaque fonction doit renvoyer 0 si la valeur n'est pas celle attendu et 1 si tout est bon
 
@@ -255,6 +259,9 @@ int main()
                 // Générer un nom de capteur unique
                 char nom[100];
                 snprintf(nom, sizeof(nom), "capteur_%d", captCount);
+
+                nouveauCapteur.fonction = test;
+
                 nouveauCapteur.nomCapt = strdup(nom);
 
                 // Convertir la valeur en entier
@@ -276,7 +283,12 @@ int main()
         // Affichage des valeurs de tous les frigo
         for (int p = 1; p < nombre_lignes; p++) {
             for (int o = 0; o < nombre_colonnes; o++) {
-                printf("Valeur de %s : %d \n", allFrigo[p][o]->nomCapt,allFrigo[p][o]->variable);
+                int resultat = allFrigo[p][o]->fonction(allFrigo[p][o]->variable);
+    
+                // Affichage du résultat de la fonction
+                printf("Le resultat est : %d\n", resultat);
+
+                // printf("Valeur de %s : %d \n", allFrigo[p][o]->nomCapt,allFrigo[p][o]->variable);
             }
             printf("\n");
         }
