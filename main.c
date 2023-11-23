@@ -23,7 +23,7 @@ int test(int variable){
 void write_CSV(const char *data)
 {
     // Open file
-    FILE *file = fopen("log.csv", "a");
+    FILE *file = fopen("log.txt", "a");
     if (file == NULL)
     {
         perror("fichier introuvable");
@@ -33,6 +33,23 @@ void write_CSV(const char *data)
     fprintf(file, "%s\n", data);
     fclose(file);
 }
+
+void viderFichier(const char *nomFichier) {
+    // Ouvrir le fichier en mode écriture
+    FILE *fichier = fopen(nomFichier, "w");
+
+    if (fichier == NULL) {
+        perror("Erreur lors de l'ouverture du fichier");
+        return;
+    }
+
+    // Fermer le fichier pour le vider
+    fclose(fichier);
+
+    printf("Le fichier %s a ete vide avec succes.\n", nomFichier);
+}
+
+
 
 // Déclaration des fonctions renvoyant les valeurs des différents capteurs :
 // Chaque fonction doit renvoyer 0 si la valeur n'est pas celle attendu et 1 si tout est bon
@@ -166,6 +183,7 @@ int VENTILATION_EXIT(int variable){
 
 int main()
 {
+    viderFichier("log.txt");
     FILE *fichier;
     fichier = fopen("config.csv", "r");
 
