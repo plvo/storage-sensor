@@ -7,6 +7,9 @@
 #define MAX_SENSOR_COUNT 13
 #define MAX_FRIGO 5
 
+#define MAX_LINE_SIZE 1024
+#define MAX_FIELD_SIZE 50
+
 #define BUFSIZE 4096
 
 struct Capt
@@ -33,6 +36,73 @@ void write_CSV(const char *data)
     fprintf(file, "%s\n", data);
     fclose(file);
 }
+
+void viderFichier(const char *nomFichier) {
+    // Ouvrir le fichier en mode écriture
+    FILE *fichier = fopen(nomFichier, "w");
+    if (fichier == NULL) {
+        perror("Erreur lors de l'ouverture du fichier");
+        return;
+    }
+    // Fermer le fichier pour le vider
+    fclose(fichier);
+    printf("Le fichier %s a ete vide avec succes.\n", nomFichier);
+}
+
+//Récuperer les variables de configuration
+char* globalConfig(const char* find) {
+    FILE *fp;
+    fp = fopen("global_config.csv", "r");
+    if (fp == NULL) {
+        printf("Impossible d'ouvrir le fichier.\n");
+        return NULL;
+    }
+
+    char str[BUFSIZE];
+    int i = 0;
+    char ligne[1000];
+    int index = 0;
+    int variant = 0;
+
+    while (fgets(str, BUFSIZE, fp) != NULL)
+    { // Parcours des lignes de fichier
+        if (i == 0)
+        {                       // Si l'index parcouru = index de la ligne rechercher
+            strcpy(ligne, str); // ligne contient les valeurs
+
+            char *token = strtok(ligne, ",");
+            while (token != NULL){
+                if (strcmp(token, find) == 0){
+                    index=variant;
+                }
+                variant++;
+                token = strtok(NULL, ",");
+            }
+        }
+
+        if (i == 1)
+        {                       // Si l'index parcouru = index de la ligne rechercher
+            strcpy(ligne, str); // ligne contient les valeurs
+
+            char *token = strtok(ligne, ",");
+            int y = 0;
+            while (token != NULL){
+                if (index == y){
+                    fclose(fp);
+                    return strdup(token);
+                }
+                token = strtok(NULL, ",");
+
+                y++;
+            }
+        }
+        i++;
+    }
+
+    fclose(fp);
+    return 0; // Configuration non trouvée
+}
+//
 
 // Déclaration des fonctions renvoyant les valeurs des différents capteurs :
 // Chaque fonction doit renvoyer 0 si la valeur n'est pas celle attendu et 1 si tout est bon
@@ -90,11 +160,14 @@ int TIMER_ON(int variable){
 }
 //capteur de la température du frigo avant toute action
 int TEMP_START(int variable){
-    if (variable==-40){
-        write_CSV("La temperature est valide - OK \n");
+    int tempLow = atoi(globalConfig("TEMP_LOW"));
+    int tempMax = atoi(globalConfig("TEMP_HIGH"));
+
+    if (variable >= tempLow && variable <= tempMax) {
+        write_CSV("La température est valide - OK \n");
         return 1;
     } else {
-        write_CSV("La temperature n'est pas bonne - STOP (error) \n");
+        write_CSV("La température n'est pas bonne - STOP (erreur) \n");
         return 0;
     }
 }
@@ -102,8 +175,9 @@ int TEMP_START(int variable){
 //vérification du chronomètre
 int TIMER_CHECK(int variable){
     char message[100];
+    int limit = atoi(globalConfig("ALARM_TIME"));
 
-    if (variable<=10){
+    if (variable<=limit){
         sprintf(message, "L'employe est reste %d min dans le frigo - OK\n", variable);
         write_CSV(message);
         return 1;
@@ -166,6 +240,7 @@ int VENTILATION_EXIT(int variable){
 
 int main()
 {
+    viderFichier("log.txt");
     FILE *fichier;
     fichier = fopen("config.csv", "r");
 
