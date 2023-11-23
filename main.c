@@ -16,6 +16,10 @@ struct Capt
     int (*fonction)(int);
 };
 
+int test(int variable){
+    return variable*2;
+}
+
 void write_CSV(const char *data)
 {
     // Open file
@@ -35,6 +39,7 @@ void write_CSV(const char *data)
 
 // capteur ventilation
 int VENTILATION_START(int variable) {
+    printf("TESTTT %d\n",variable);
     if (variable==1){
         write_CSV("La ventillation du frigo fonctionne - OK \n");
         return 1;
@@ -262,34 +267,35 @@ int main()
                 nouveauCapteur.nomCapt = strdup(nom);
 
                 // Conditions de mise en place des fonctions :
-                if (strcmp(nouveauCapteur.nomCapt, "capteur_1") == 0){
-                    printf("capteur_2\n");
-                    nouveauCapteur.fonction = VENTILATION_START;
-                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_2") == 0){
-                    printf("capteur_3\n");
-                    nouveauCapteur.fonction = BADGE_ON;
-                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_3") == 0){
-                    printf("capteur_4\n");
-                    nouveauCapteur.fonction = ENTER_DOOR_OPEN;
-                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_4") == 0){
-                    nouveauCapteur.fonction = ENTER_DOOR_CLOSE;
-                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_5") == 0){
-                    nouveauCapteur.fonction = TIMER_ON;
-                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_6") == 0){
-                    nouveauCapteur.fonction = TEMP_START;
-                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_7") == 0){
-                    nouveauCapteur.fonction = TIMER_CHECK;
-                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_8") == 0){
-                    nouveauCapteur.fonction = EXIT_DOOR_OPEN;
-                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_9") == 0){
-                    nouveauCapteur.fonction = EXIT_DOOR_CLOSE;
-                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_10") == 0){
-                    nouveauCapteur.fonction = BADGE_OFF;
-                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_11") == 0){
-                    nouveauCapteur.fonction = TEMP_END;
-                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_12") == 0){
-                    nouveauCapteur.fonction = VENTILATION_EXIT;
-                }               
+                // if (strcmp(nouveauCapteur.nomCapt, "capteur_1") == 0){
+                //     nouveauCapteur.fonction = VENTILATION_START;
+                //     printf("capteur_2\n");
+                // } else if (strcmp(nouveauCapteur.nomCapt, "capteur_2") == 0){
+                //     printf("capteur_3\n");
+                //     nouveauCapteur.fonction = BADGE_ON;
+                // } else if (strcmp(nouveauCapteur.nomCapt, "capteur_3") == 0){
+                //     printf("capteur_4\n");
+                //     nouveauCapteur.fonction = ENTER_DOOR_OPEN;
+                // } else if (strcmp(nouveauCapteur.nomCapt, "capteur_4") == 0){
+                //     nouveauCapteur.fonction = ENTER_DOOR_CLOSE;
+                // } else if (strcmp(nouveauCapteur.nomCapt, "capteur_5") == 0){
+                //     nouveauCapteur.fonction = TIMER_ON;
+                // } else if (strcmp(nouveauCapteur.nomCapt, "capteur_6") == 0){
+                //     nouveauCapteur.fonction = TEMP_START;
+                // } else if (strcmp(nouveauCapteur.nomCapt, "capteur_7") == 0){
+                //     nouveauCapteur.fonction = TIMER_CHECK;
+                // } else if (strcmp(nouveauCapteur.nomCapt, "capteur_8") == 0){
+                //     nouveauCapteur.fonction = EXIT_DOOR_OPEN;
+                // } else if (strcmp(nouveauCapteur.nomCapt, "capteur_9") == 0){
+                //     nouveauCapteur.fonction = EXIT_DOOR_CLOSE;
+                // } else if (strcmp(nouveauCapteur.nomCapt, "capteur_10") == 0){
+                //     nouveauCapteur.fonction = BADGE_OFF;
+                // } else if (strcmp(nouveauCapteur.nomCapt, "capteur_11") == 0){
+                //     nouveauCapteur.fonction = TEMP_END;
+                // } else if (strcmp(nouveauCapteur.nomCapt, "capteur_12") == 0){
+                //     nouveauCapteur.fonction = VENTILATION_EXIT;
+                // }         
+                nouveauCapteur.fonction = VENTILATION_START;
                 //
 
                 // Convertir la valeur en entier
@@ -316,9 +322,7 @@ int main()
         for (int p = 1; p <= nombre_lignes; p++) {
             for (int o = 0; o < nombre_colonnes; o++) {
 
-                printf("Avant l'appel de la fonction\n");
                 int resultat = allFrigo[p][o]->fonction(allFrigo[p][o]->variable);
-                printf("Après l'appel de la fonction\n");                // Affichage du résultat de la fonction
                 printf("Le resultat est : %d\n", resultat);
 
                 // printf("Valeur de %s : %d \n", allFrigo[p][o]->nomCapt,allFrigo[p][o]->variable);
