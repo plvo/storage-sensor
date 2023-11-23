@@ -219,7 +219,7 @@ int main()
             return 1;
         }
 
-        for (int y = 1; y < nombre_lignes; y++)
+        for (int y = 1; y <= nombre_lignes; y++)
         {
             struct Capt **frigo = (struct Capt **)malloc(nombre_colonnes * sizeof(struct Capt *)); // frigo est un tableau de capteur
 
@@ -259,10 +259,11 @@ int main()
                 // Générer un nom de capteur unique
                 char nom[100];
                 snprintf(nom, sizeof(nom), "capteur_%d", captCount);
-
-                nouveauCapteur.fonction = test;
-
                 nouveauCapteur.nomCapt = strdup(nom);
+
+                // Conditions de mise en place des fonctions :
+                nouveauCapteur.fonction = test;
+                //
 
                 // Convertir la valeur en entier
                 nouveauCapteur.variable = atoi(token);
@@ -272,6 +273,8 @@ int main()
 
                 token = strtok(NULL, ",");
                 captCount++;
+
+                printf("Nom : %s \n",nouveauCapteur.nomCapt);
             }
 
             rewind(fp); // Réinitialiser le curseur
@@ -280,12 +283,12 @@ int main()
         }
 
         // Affichage des valeurs de tous les frigo
-        for (int p = 1; p < nombre_lignes; p++) {
+        for (int p = 1; p <= nombre_lignes; p++) {
             for (int o = 0; o < nombre_colonnes; o++) {
-                int resultat = allFrigo[p][o]->fonction(allFrigo[p][o]->variable);
-    
+                // int resultat = allFrigo[p][o]->fonction(allFrigo[p][o]->variable);
+                // char resultat = allFrigo[p][o]->nomCapt;
                 // Affichage du résultat de la fonction
-                printf("Le resultat est : %d\n", resultat);
+                // printf("Le resultat est : %d\n", resultat);
 
                 // printf("Valeur de %s : %d \n", allFrigo[p][o]->nomCapt,allFrigo[p][o]->variable);
             }
@@ -293,7 +296,7 @@ int main()
         }
 
         // Libération de la mémoire
-        for (int i = 1; i < nombre_lignes; i++) {
+        for (int i = 1; i <= nombre_lignes; i++) {
             for (int j = 0; j < nombre_colonnes; j++) {
                 free(allFrigo[i][j]);
             }
