@@ -62,8 +62,8 @@ int main() {
             info[i].BADGE_ON = BADGE_ON_v;
             info[i].ENTER_DOOR_OPEN = ENTER_DOOR_OPEN_v;
             info[i].ENTER_DOOR_CLOSE = ENTER_DOOR_CLOSE_v;
-            info[i].TIMER_ON = TEMP_START_v;
-            info[i].TEMP_START = TIMER_CHECK_v;
+            info[i].TIMER_ON = TIMER_ON_v;
+            info[i].TEMP_START = TEMP_START_v;
             info[i].TIMER_CHECK = TIMER_CHECK_v;
             info[i].EXIT_DOOR_OPEN = EXIT_DOOR_OPEN_v;
             info[i].EXIT_DOOR_CLOSE = EXIT_DOOR_CLOSE_v;
