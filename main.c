@@ -316,8 +316,14 @@ int main()
 
         // Affichage des valeurs de tous les frigo
         for (int p = 1; p <= nombre_lignes; p++) {
-            for (int o = 1; o < nombre_colonnes; o++) {
+            
+            char message[100];
+            sprintf(message, "# FRIGO %d #", p);
+            write_CSV("###########");
+            write_CSV(message);
+            write_CSV("###########\n");
 
+            for (int o = 1; o < nombre_colonnes; o++) {
                 int resultat = allFrigo[p][o]->fonction(allFrigo[p][o]->variable);
                 printf("Le resultat est : %d\n", resultat);
 
