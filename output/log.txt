@@ -2,6 +2,8 @@
 # FRIGO 1 #
 ###########
 
+Le SAS s'ouvre -OK
+
 La ventillation du frigo fonctionne - OK 
 
 Le badge a ete depose - OK 
@@ -26,9 +28,13 @@ La temperature est correcte apres passage - OK
 
 La ventilation est toujours active apres passage - OK 
 
+Le SAS s'ouvre -OK
+
 ###########
 # FRIGO 2 #
 ###########
+
+Le SAS s'ouvre -OK
 
 La ventillation du frigo ne fonctionne pas - STOP (error) 
 
@@ -54,9 +60,13 @@ La temperature est correcte apres passage - OK
 
 La ventilation est toujours active apres passage - OK 
 
+Le SAS ne s'ouvre pas -STOP (error) 
+
 ###########
 # FRIGO 3 #
 ###########
+
+Le SAS se ferme -STOP (error) 
 
 La ventillation du frigo fonctionne - OK 
 
@@ -82,9 +92,13 @@ La temperature est correcte apres passage - OK
 
 La ventilation est toujours active apres passage - OK 
 
+Le SAS s'ouvre -OK
+
 ###########
 # FRIGO 4 #
 ###########
+
+Le SAS s'ouvre -OK
 
 La ventillation du frigo fonctionne - OK 
 
@@ -110,9 +124,13 @@ La temperature est correcte apres passage - OK
 
 La ventilation est toujours active apres passage - OK 
 
+Le SAS s'ouvre -OK
+
 ###########
 # FRIGO 5 #
 ###########
+
+Le SAS se ferme -STOP (error) 
 
 La ventillation du frigo ne fonctionne pas - STOP (error) 
 
@@ -138,9 +156,13 @@ La temperature est correcte apres passage - OK
 
 La ventilation est toujours active apres passage - OK 
 
+Le SAS s'ouvre -OK
+
 ###########
 # FRIGO 6 #
 ###########
+
+Le SAS s'ouvre -OK
 
 La ventillation du frigo fonctionne - OK 
 
@@ -165,4 +187,6 @@ Le badge a ete recupere - OK
 La temperature est correcte apres passage - OK 
 
 La ventilation est toujours active apres passage - OK 
+
+Le SAS ne s'ouvre pas -STOP (error) 
 

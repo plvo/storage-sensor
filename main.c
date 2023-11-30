@@ -109,11 +109,12 @@ char* globalConfig(const char* find) {
 
 int SAS_OPEN(int variable){
     if (variable==1){
-        write_CSV("Le SAS s'ouvre -OK\n");
+        write_CSV("Le SAS s'ouvre - OK\n");
         return 1;
     } else {
-        write_CSV("Le SAS se ferme -STOP (error) \n");
+        write_CSV("Le SAS se ferme - STOP (error) \n");
         return 0;
+    }
 }
 
 // capteur ventilation
@@ -249,17 +250,13 @@ int VENTILATION_EXIT(int variable){
 
 int SAS_CLOSE(int variable){
     if (variable==1){
-        write_CSV("Le SAS s'ouvre -OK\n");
+        write_CSV("Le SAS s'ouvre - OK\n");
         return 1;
     } else {
-        write_CSV("Le SAS ne s'ouvre pas -STOP (error) \n");
+        write_CSV("Le SAS ne s'ouvre pas - STOP (error) \n");
         return 0;
-<<<<<<< Updated upstream
-}}
-=======
     }
 }
->>>>>>> Stashed changes
 
 int main()
 {
@@ -359,6 +356,8 @@ int main()
                 snprintf(nom, sizeof(nom), "capteur_%d", captCount);
                 nouveauCapteur.nomCapt = strdup(nom);
 
+                printf("%s \n",nouveauCapteur.nomCapt);
+
                 // Conditions de mise en place des fonctions :
                 if (strcmp(nouveauCapteur.nomCapt, "capteur_1") == 0){
                     nouveauCapteur.fonction = SAS_OPEN;
@@ -388,7 +387,7 @@ int main()
                     nouveauCapteur.fonction = VENTILATION_EXIT;
                 } else if (strcmp(nouveauCapteur.nomCapt, "capteur_14") == 0){
                     nouveauCapteur.fonction = SAS_CLOSE;
-                }    
+                };
                 // nouveauCapteur.fonction = VENTILATION_START;
                 //
 
