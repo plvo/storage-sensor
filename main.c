@@ -254,7 +254,12 @@ int SAS_CLOSE(int variable){
     } else {
         write_CSV("Le SAS ne s'ouvre pas -STOP (error) \n");
         return 0;
+<<<<<<< Updated upstream
 }}
+=======
+    }
+}
+>>>>>>> Stashed changes
 
 int main()
 {
