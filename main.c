@@ -254,7 +254,7 @@ int SAS_CLOSE(int variable){
     } else {
         write_CSV("Le SAS ne s'ouvre pas -STOP (error) \n");
         return 0;
-}
+}}
 
 int main()
 {
@@ -380,8 +380,10 @@ int main()
                 } else if (strcmp(nouveauCapteur.nomCapt, "capteur_12") == 0){
                     nouveauCapteur.fonction = TEMP_END;
                 } else if (strcmp(nouveauCapteur.nomCapt, "capteur_13") == 0){
+                    nouveauCapteur.fonction = VENTILATION_EXIT;
+                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_14") == 0){
                     nouveauCapteur.fonction = SAS_CLOSE;
-                }        
+                }    
                 // nouveauCapteur.fonction = VENTILATION_START;
                 //
 
