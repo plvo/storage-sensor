@@ -107,6 +107,16 @@ char* globalConfig(const char* find) {
 // Déclaration des fonctions renvoyant les valeurs des différents capteurs :
 // Chaque fonction doit renvoyer 0 si la valeur n'est pas celle attendu et 1 si tout est bon
 
+int SAS_OPEN(int variable){
+    if (variable==1){
+        write_CSV("Le SAS s'ouvre - OK\n");
+        return 1;
+    } else {
+        write_CSV("Le SAS se ferme - STOP (error) \n");
+        return 0;
+    }
+}
+
 // capteur ventilation
 int VENTILATION_START(int variable) {
     if (variable==1){
@@ -210,7 +220,7 @@ int EXIT_DOOR_CLOSE(int variable){
 //verification que le badge est recupere
 int BADGE_OFF(int variable){
     if (variable==1){
-        write_CSV("Le badge a ete recupere - OK \n");
+        write_CSV("Le badge a ete recupere - OK \n"); 
         return 1;
     } else {
         write_CSV("Le badge n'a pas ete recupere - STOP (error) \n");
@@ -234,6 +244,16 @@ int VENTILATION_EXIT(int variable){
         return 1;
     } else {
         write_CSV("La ventilation n'est plus active apres passage - STOP (error) \n");
+        return 0;
+    }
+}
+
+int SAS_CLOSE(int variable){
+    if (variable==1){
+        write_CSV("Le SAS s'ouvre - OK\n");
+        return 1;
+    } else {
+        write_CSV("Le SAS ne s'ouvre pas - STOP (error) \n");
         return 0;
     }
 }
@@ -338,30 +358,34 @@ int main()
 
                 // Conditions de mise en place des fonctions :
                 if (strcmp(nouveauCapteur.nomCapt, "capteur_1") == 0){
-                    nouveauCapteur.fonction = VENTILATION_START;
+                    nouveauCapteur.fonction = SAS_OPEN;
                 } else if (strcmp(nouveauCapteur.nomCapt, "capteur_2") == 0){
-                    nouveauCapteur.fonction = BADGE_ON;
+                    nouveauCapteur.fonction = VENTILATION_START;
                 } else if (strcmp(nouveauCapteur.nomCapt, "capteur_3") == 0){
-                    nouveauCapteur.fonction = ENTER_DOOR_OPEN;
+                    nouveauCapteur.fonction = BADGE_ON;
                 } else if (strcmp(nouveauCapteur.nomCapt, "capteur_4") == 0){
-                    nouveauCapteur.fonction = ENTER_DOOR_CLOSE;
+                    nouveauCapteur.fonction = ENTER_DOOR_OPEN;
                 } else if (strcmp(nouveauCapteur.nomCapt, "capteur_5") == 0){
-                    nouveauCapteur.fonction = TIMER_ON;
+                    nouveauCapteur.fonction = ENTER_DOOR_CLOSE;
                 } else if (strcmp(nouveauCapteur.nomCapt, "capteur_6") == 0){
-                    nouveauCapteur.fonction = TEMP_START;
+                    nouveauCapteur.fonction = TIMER_ON;
                 } else if (strcmp(nouveauCapteur.nomCapt, "capteur_7") == 0){
-                    nouveauCapteur.fonction = TIMER_CHECK;
+                    nouveauCapteur.fonction = TEMP_START;
                 } else if (strcmp(nouveauCapteur.nomCapt, "capteur_8") == 0){
-                    nouveauCapteur.fonction = EXIT_DOOR_OPEN;
+                    nouveauCapteur.fonction = TIMER_CHECK;
                 } else if (strcmp(nouveauCapteur.nomCapt, "capteur_9") == 0){
-                    nouveauCapteur.fonction = EXIT_DOOR_CLOSE;
+                    nouveauCapteur.fonction = EXIT_DOOR_OPEN;
                 } else if (strcmp(nouveauCapteur.nomCapt, "capteur_10") == 0){
-                    nouveauCapteur.fonction = BADGE_OFF;
+                    nouveauCapteur.fonction = EXIT_DOOR_CLOSE;
                 } else if (strcmp(nouveauCapteur.nomCapt, "capteur_11") == 0){
-                    nouveauCapteur.fonction = TEMP_END;
+                    nouveauCapteur.fonction = BADGE_OFF;
                 } else if (strcmp(nouveauCapteur.nomCapt, "capteur_12") == 0){
+                    nouveauCapteur.fonction = TEMP_END;
+                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_13") == 0){
                     nouveauCapteur.fonction = VENTILATION_EXIT;
-                }         
+                } else if (strcmp(nouveauCapteur.nomCapt, "capteur_14") == 0){
+                    nouveauCapteur.fonction = SAS_CLOSE;
+                };
                 // nouveauCapteur.fonction = VENTILATION_START;
                 //
 
