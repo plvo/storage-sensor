@@ -5,7 +5,7 @@
 
 
 int ClearCSV() {
-    const char *nomFichier = "testconfig.csv";
+    const char *nomFichier = "./config/config.csv";
     // Ouvrir le fichier en mode lecture
     FILE *fichier = fopen(nomFichier, "r");
     if (fichier == NULL) {
@@ -88,36 +88,30 @@ int randomIntGen(int min, int max) {
 }
 
 int ArrayFormatForCSV(){
-    int ArrayForCSV[13];
-    ArrayForCSV[0] = nombreDeLignesDansCSV("testconfig.csv");
+    int ArrayForCSV[15];
+    ArrayForCSV[0] = nombreDeLignesDansCSV("./config/config.csv");
     ArrayForCSV[1] = randomIntGen(0, 1);
     ArrayForCSV[2] = randomIntGen(0, 1);
     ArrayForCSV[3] = randomIntGen(0, 1);
     ArrayForCSV[4] = randomIntGen(0, 1);
     ArrayForCSV[5] = randomIntGen(0, 1);
-    ArrayForCSV[6] = randomIntGen(-42, -38);
-    ArrayForCSV[7] = randomIntGen(0, 10);
-    ArrayForCSV[8] = randomIntGen(0, 1);
+    ArrayForCSV[6] = randomIntGen(0, 1);
+    ArrayForCSV[7] = randomIntGen(-42, -38);
+    ArrayForCSV[8] = randomIntGen(0, 10);
     ArrayForCSV[9] = randomIntGen(0, 1);
     ArrayForCSV[10] = randomIntGen(0, 1);
-    ArrayForCSV[11] = randomIntGen(-42, -38);
-    ArrayForCSV[12] = randomIntGen(0, 1);
+    ArrayForCSV[11] = randomIntGen(0, 1);
+    ArrayForCSV[12] = randomIntGen(-42, -38);
+    ArrayForCSV[13] = randomIntGen(0, 1);
+    ArrayForCSV[14] = randomIntGen(0, 1);
 
-    ajouterLigneCSV("testconfig.csv", ArrayForCSV, 13);
-
+    ajouterLigneCSV("./config/config.csv", ArrayForCSV, 15);
 }
 
 
-
-
-
-
-
-
-
-
 int main(){
-    int NumberOfFrigo = 67; // Put here the number of frigo that you have in your Cave
+    ClearCSV();
+    int NumberOfFrigo = 10; // Put here the number of frigo that you have in your Cave
     for (int i = 0; i < NumberOfFrigo; ++i) {
         ArrayFormatForCSV();
     }
