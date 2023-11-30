@@ -26,7 +26,7 @@ int test(int variable){
 void write_CSV(const char *data)
 {
     // Open file
-    FILE *file = fopen("log.csv", "a");
+    FILE *file = fopen("log.txt", "a");
     if (file == NULL)
     {
         perror("fichier introuvable");
@@ -52,7 +52,7 @@ void viderFichier(const char *nomFichier) {
 //Récuperer les variables de configuration
 char* globalConfig(const char* find) {
     FILE *fp;
-    fp = fopen("global_config.csv", "r");
+    fp = fopen("./config/global_config.csv", "r");
     if (fp == NULL) {
         printf("Impossible d'ouvrir le fichier.\n");
         return NULL;
@@ -242,7 +242,7 @@ int main()
 {
     viderFichier("log.txt");
     FILE *fichier;
-    fichier = fopen("config.csv", "r");
+    fichier = fopen("./config/config.csv", "r");
 
     // Vérification de la bonne lecture du fichier config
     if (fichier == NULL)
@@ -277,9 +277,6 @@ int main()
     if (nombre_lignes > 0 && nombre_colonnes > 0)
     {
         nombre_lignes -= 1;
-        printf("Nombre de lignes : %d\n", nombre_lignes);
-        printf("Nombre de colonnes : %d\n", nombre_colonnes);
-
         // Initialisation du tableau global avec sa memoire
         struct Capt ***allFrigo = (struct Capt ***)malloc(nombre_lignes * sizeof(struct Capt **));
         if (allFrigo == NULL)
@@ -291,7 +288,7 @@ int main()
         rewind(fichier);
 
         FILE *fp;
-        fp = fopen("config.csv", "r");
+        fp = fopen("./config/config.csv", "r");
         if (fp == NULL)
         {
             printf("Erreur fopen\n");
@@ -321,7 +318,6 @@ int main()
                 if (i == y)
                 {                       // Si l'index parcouru = index de la ligne rechercher
                     strcpy(ligne, str); // ligne contient les valeurs
-                    printf("Contenu de la ligne : %s\n", str);
                 }
                 i++;
             }
@@ -400,7 +396,7 @@ int main()
 
             for (int o = 1; o < nombre_colonnes; o++) {
                 int resultat = allFrigo[p][o]->fonction(allFrigo[p][o]->variable);
-                printf("Le resultat est : %d\n", resultat);
+                printf("%d", resultat);
 
                 // printf("Valeur de %s : %d \n", allFrigo[p][o]->nomCapt,allFrigo[p][o]->variable);
             }
