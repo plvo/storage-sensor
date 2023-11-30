@@ -19,10 +19,6 @@ struct Capt
     int (*fonction)(int);
 };
 
-int test(int variable){
-    return variable*2;
-}
-
 void write_CSV(const char *data)
 {
     // Open file
@@ -174,10 +170,10 @@ int TEMP_START(int variable){
     int tempMax = atoi(globalConfig("TEMP_HIGH"));
 
     if (variable >= tempLow && variable <= tempMax) {
-        write_CSV("La température est valide - OK \n");
+        write_CSV("La temperature est valide - OK \n");
         return 1;
     } else {
-        write_CSV("La température n'est pas bonne - STOP (erreur) \n");
+        write_CSV("La temperature n'est pas bonne - STOP (erreur) \n");
         return 0;
     }
 }
@@ -258,8 +254,121 @@ int SAS_CLOSE(int variable){
     }
 }
 
+////////////////////////////////////////////RANDOMIZER///////////////////////////////////////////
+int ClearCSV() {
+    const char *nomFichier = "./config/config.csv";
+    // Ouvrir le fichier en mode lecture
+    FILE *fichier = fopen(nomFichier, "r");
+    if (fichier == NULL) {
+        perror("Erreur lors de l'ouverture du fichier en lecture");
+        return 1;
+    }
+    // Lire et stocker la première ligne
+    char premiereLigne[1024];  // Taille maximale de la ligne (ajuster si nécessaire)
+    if (fgets(premiereLigne, sizeof(premiereLigne), fichier) == NULL) {
+        perror("Erreur lors de la lecture de la première ligne");
+        fclose(fichier);
+        return 1;
+    }
+    // Fermer le fichier en lecture
+    fclose(fichier);
+    // Ouvrir le fichier en mode écriture (efface le contenu existant)
+    fichier = fopen(nomFichier, "w");
+    if (fichier == NULL) {
+        perror("Erreur lors de l'ouverture du fichier en ecriture");
+        return 1;
+    }
+    // Écrire la première ligne dans le fichier
+    fputs(premiereLigne, fichier);
+
+    // Fermer le fichier en écriture
+    fclose(fichier);
+    printf("Contenu du fichier CSV (sauf la première ligne) efface avec succès.\n");
+    return 0;
+}
+
+// ajouter notre tableau a notre CSV de config 
+void ajouterLigneCSV(const char *nomFichier, int tableau[], int taille) {
+    // Ouvrir le fichier en mode ajout (a) pour ajouter du contenu à la fin
+    FILE *fichier = fopen(nomFichier, "a");
+    if (fichier == NULL) {
+        perror("Erreur lors de l'ouverture du fichier");
+        return;
+    }
+    // Écrire la ligne dans le fichier
+    for (int i = 0; i < taille; ++i) {
+        fprintf(fichier, "%d", tableau[i]);
+        // Ajouter une virgule si ce n'est pas la dernière valeur
+        if (i < taille - 1) {
+            fprintf(fichier, ",");
+        }
+    }
+    fprintf(fichier, "\n");
+    // Fermer le fichier
+    fclose(fichier);
+}
+
+int nombreDeLignesDansCSV(const char *nomFichier) {
+    FILE *fichier = fopen(nomFichier, "r");
+
+    if (fichier == NULL) {
+        perror("Erreur lors de l'ouverture du fichier en lecture");
+        return -1;  // Code d'erreur pour indiquer une erreur d'ouverture
+    }
+    int nombreDeLignes = 0;
+    char ligne[1024];  // Taille maximale de la ligne
+    // Lire chaque ligne du fichier
+    while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
+        nombreDeLignes++;
+    }
+    fclose(fichier);
+    return nombreDeLignes;
+}
+
+
+//générer un nopmbre aléatoire entre 2 nombre 
+int randomIntGen(int min, int max) {
+    if (min >= max) {
+        fprintf(stderr, "Erreur : Les bornes ne sont pas valides.\n");
+        exit(EXIT_FAILURE);
+    }
+    int plage = max - min + 1;
+    int nombre = rand() % plage + min;
+    return nombre;
+}
+
+void ArrayFormatForCSV(){
+    int ArrayForCSV[15];
+    ArrayForCSV[0] = nombreDeLignesDansCSV("./config/config.csv");
+    ArrayForCSV[1] = randomIntGen(0, 1);
+    ArrayForCSV[2] = randomIntGen(0, 1);
+    ArrayForCSV[3] = randomIntGen(0, 1);
+    ArrayForCSV[4] = randomIntGen(0, 1);
+    ArrayForCSV[5] = randomIntGen(0, 1);
+    ArrayForCSV[6] = randomIntGen(0, 1);
+    ArrayForCSV[7] = randomIntGen(-42, -38);
+    ArrayForCSV[8] = randomIntGen(0, 10);
+    ArrayForCSV[9] = randomIntGen(0, 1);
+    ArrayForCSV[10] = randomIntGen(0, 1);
+    ArrayForCSV[11] = randomIntGen(0, 1);
+    ArrayForCSV[12] = randomIntGen(-42, -38);
+    ArrayForCSV[13] = randomIntGen(0, 1);
+    ArrayForCSV[14] = randomIntGen(0, 1);
+
+    ajouterLigneCSV("./config/config.csv", ArrayForCSV, 15);
+}
+
+////////////////////////////////////////////end RANDOMIZER///////////////////////////////////////////
+
+
 int main()
 {
+    ClearCSV();
+    int NumberOfFrigo = 11; // Put here the number of frigo that you have in your Cave
+    for (int i = 0; i < NumberOfFrigo; ++i) {
+        ArrayFormatForCSV();
+    }
+
     viderFichier("log.txt");
     FILE *fichier;
     fichier = fopen("./config/config.csv", "r");
@@ -301,7 +410,7 @@ int main()
         struct Capt ***allFrigo = (struct Capt ***)malloc(nombre_lignes * sizeof(struct Capt **));
         if (allFrigo == NULL)
         {
-            printf("Échec de l'allocation de mémoire.\n");
+            printf("Echec de l'allocation de memoire.\n");
             return 1;
         }
 
@@ -324,7 +433,7 @@ int main()
                 frigo[i] = (struct Capt *)malloc(sizeof(struct Capt));
                 if (frigo[i] == NULL)
                 {
-                    printf("Échec de l'allocation de mémoire pour frigo[i].\n");
+                    printf("Echec de l'allocation de memoire pour frigo[i].\n");
                     return 1;
                 }
             }
@@ -438,7 +547,7 @@ int main()
     }
     else
     {
-        printf("Le fichier est vide ou ne contient pas de données CSV valides.\n");
+        printf("Le fichier est vide ou ne contient pas de donnees CSV valides.\n");
     }
 
     return 0;
