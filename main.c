@@ -356,8 +356,6 @@ int main()
                 snprintf(nom, sizeof(nom), "capteur_%d", captCount);
                 nouveauCapteur.nomCapt = strdup(nom);
 
-                printf("%s \n",nouveauCapteur.nomCapt);
-
                 // Conditions de mise en place des fonctions :
                 if (strcmp(nouveauCapteur.nomCapt, "capteur_1") == 0){
                     nouveauCapteur.fonction = SAS_OPEN;
